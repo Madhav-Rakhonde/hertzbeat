@@ -53,11 +53,19 @@ public class ModelProviderConfig {
 
     @Schema(title = "Participation Model", description = "model for participation", example = "PROTECTED")
     private String participationModel;
+
     @Schema(title = "Wire protocol: chat-completions (legacy default) or responses")
     private String protocol;
 
+    @Schema(title = "Temperature",
+            description = "Sampling temperature for the model (0.0 – 2.0). "
+                    + "Higher values produce more random output, lower values are more deterministic. "
+                    + "Defaults to 0.3 when not set.",
+            example = "0.3")
+    private Double temperature;
+
     public ModelProviderConfig(String uid, String type, String code, String baseUrl, String model,
                                String apiKey, String participationModel) {
-        this(uid, type, code, baseUrl, model, apiKey, participationModel, null);
+        this(uid, type, code, baseUrl, model, apiKey, participationModel, null, null);
     }
 }

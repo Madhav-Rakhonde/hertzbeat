@@ -160,10 +160,17 @@ public class LlmConfig {
                 List.of());
 
         // Create Chat Options
+        // Resolve temperature: use the value from config when provided, otherwise fall back to 0.3.
+        double temperature = modelProviderConfig.getTemperature() != null
+                ? modelProviderConfig.getTemperature()
+                : 0.3;
+
+        // Create Chat Options with baseUrl and apiKey
         OpenAiChatOptions openAiChatOptions = OpenAiChatOptions.builder()
-                .model(modelProviderConfig.getModel())
-                .temperature(0.3)
+                .baseUrl(modelProviderConfig.getBaseUrl())
                 .apiKey(modelProviderConfig.getApiKey())
+                .model(modelProviderConfig.getModel())
+                .temperature(temperature)
                 .build();
 
         // Create Chat Model
